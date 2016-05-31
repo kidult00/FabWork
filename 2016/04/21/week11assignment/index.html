@@ -64,13 +64,18 @@
 <meta property="og:site_name" content="Hackesign">
 <meta property="og:description">
 <meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/week11.png">
+<meta property="og:image" content="http://archive.fabacademy.org/archives/2016/fablabshenzhen/students/408/Web/images/week13__output_devices/u49.jpg">
 <meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/hello.light.45.png">
 <meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/week11mylightboard.jpeg">
+<meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/WeChat_1464706293.jpeg">
 <meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/hello.button.45.png">
 <meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/week11myswitchboard.jpeg">
+<meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/WeChat_1464706284.jpeg">
+<meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/WeChat_1464706285.jpeg">
 <meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/hello.temp.45.png">
 <meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/week11mytempboard.jpeg">
-<meta property="og:updated_time" content="2016-05-21T09:15:01.000Z">
+<meta property="og:image" content="http://7xjpra.com1.z0.glb.clouddn.com/WeChat_1464706291.jpeg">
+<meta property="og:updated_time" content="2016-05-31T15:11:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Week11 - Input Devices">
 <meta name="twitter:description">
@@ -265,12 +270,54 @@
 <h2 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h2><blockquote>
 <p>measure something: add a sensor to a microcontroller board that you have designed and read it</p>
 </blockquote>
-<h3 id="A_light_board"><a href="#A_light_board" class="headerlink" title="A light board"></a>A light board</h3><p><img src="http://7xjpra.com1.z0.glb.clouddn.com/hello.light.45.png" alt=""></p>
+<p>In my assignment, I use Attiny45:</p>
+<p><img src="http://archive.fabacademy.org/archives/2016/fablabshenzhen/students/408/Web/images/week13__output_devices/u49.jpg" alt=""></p>
+<h3 id="A_light_board"><a href="#A_light_board" class="headerlink" title="A light board"></a>A light board</h3><p>I made a board with a light sensor:</p>
+<p><img src="http://7xjpra.com1.z0.glb.clouddn.com/hello.light.45.png" alt=""></p>
 <p><img src="http://7xjpra.com1.z0.glb.clouddn.com/week11mylightboard.jpeg" alt=""></p>
-<h3 id="A_switch_board"><a href="#A_switch_board" class="headerlink" title="A switch board"></a>A switch board</h3><p><img src="http://7xjpra.com1.z0.glb.clouddn.com/hello.button.45.png" alt=""></p>
+<p>Then download <a href="http://academy.cba.mit.edu/classes/input_devices/light/hello.light.45.c" target="_blank" rel="external">hello.light.45.c</a> and <a href="http://academy.cba.mit.edu/classes/input_devices/light/hello.light.45.make" target="_blank" rel="external">makefile</a>. cd into the folder in terminal, run make command: <code>make -f hello.light.45.make</code></p>
+<p>it responds</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avr-gcc -mmcu=attiny45 -Wall -Os -DF_CPU=8000000 -I./ -o hello.button.45.out hello.button.45.c&#10;avr-objcopy -O ihex hello.button.45.out hello.button.45.c.hex;\&#10;&#9;avr-size --mcu=attiny45 --format=avr hello.button.45.out&#10;AVR Memory Usage&#10;----------------&#10;Device: attiny45&#10;&#10;Program:     364 bytes (8.9% Full)&#10;(.text + .data + .bootloader)&#10;&#10;Data:          0 bytes (0.0% Full)&#10;(.data + .bss + .noinit)</span><br></pre></td></tr></table></figure>
+<p>Next command: <code>sudo make -f hello.light.45.make program-usbtiny</code></p>
+<p>It responds:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avr-objcopy -O ihex hello.light.45.out hello.light.45.c.hex;\&#10;&#9;avr-size --mcu=attiny45 --format=avr hello.light.45.out&#10;AVR Memory Usage&#10;----------------&#10;Device: attiny45&#10;&#10;Program:     502 bytes (12.3% Full)&#10;(.text + .data + .bootloader)&#10;&#10;Data:          1 bytes (0.4% Full)&#10;(.data + .bss + .noinit)&#10;&#10;&#10;avrdude -p t45 -P usb -c usbtiny -U flash:w:hello.light.45.c.hex&#10;&#10;avrdude: AVR device initialized and ready to accept instructions&#10;&#10;Reading | ################################################## | 100% 0.00s&#10;&#10;avrdude: Device signature = 0x1e9206&#10;avrdude: NOTE: &#34;flash&#34; memory has been specified, an erase cycle will be performed&#10;         To disable this feature, specify the -D option.&#10;avrdude: erasing chip&#10;avrdude: reading input file &#34;hello.light.45.c.hex&#34;&#10;avrdude: input file hello.light.45.c.hex auto detected as Intel Hex&#10;avrdude: writing flash (502 bytes):&#10;&#10;Writing | ################################################## | 100% 0.74s&#10;&#10;avrdude: 502 bytes of flash written&#10;avrdude: verifying flash memory against hello.light.45.c.hex:&#10;avrdude: load data flash data from input file hello.light.45.c.hex:&#10;avrdude: input file hello.light.45.c.hex auto detected as Intel Hex&#10;avrdude: input file hello.light.45.c.hex contains 502 bytes&#10;avrdude: reading on-chip flash data:&#10;&#10;Reading | ################################################## | 100% 0.94s&#10;&#10;avrdude: verifying ...&#10;avrdude: 502 bytes of flash verified</span><br></pre></td></tr></table></figure>
+<p>Then download <a href="http://academy.cba.mit.edu/classes/input_devices/light/hello.light.45.py" target="_blank" rel="external">hello.light.45.py</a>.</p>
+<p>Connet my board with USB to TTL and run:</p>
+<p><code>python hello.light.45.py /dev/ttyUSB0</code></p>
+<p>It responds:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):&#10;  File &#34;hello.light.45.py&#34;, line 62, in &#60;module&#62;&#10;    ser = serial.Serial(port,9600)&#10;  File &#34;/Library/Python/2.7/site-packages/serial/serialutil.py&#34;, line 180, in __init__&#10;    self.open()&#10;  File &#34;/Library/Python/2.7/site-packages/serial/serialposix.py&#34;, line 294, in open&#10;    raise SerialException(msg.errno, &#34;could not open port %s: %s&#34; % (self._port, msg))&#10;serial.serialutil.SerialException: [Errno 2] could not open port /dev/ttyUSB0: [Errno 2] No such file or directory: &#39;/dev/ttyUSB0&#39;</span><br></pre></td></tr></table></figure>
+<p>I google this problem: <a href="http://answers.ros.org/question/41275/failed-to-open-port-devttyusb0/" target="_blank" rel="external">Failed to open port /dev/ttyUSB0 - ROS Answers: Open Source Q&amp;A Forum</a></p>
+<p>My classmate told me that maybe because I didn’t have FTDI drive. </p>
+<p>I use this command to check my port <code>ls /dev/tty*</code>. There’s no /dev/tty.usbserial-A400gwhT exist.</p>
+<p>So I tried install <a href="http://www.ftdichip.com/Drivers/D2XX.htm" target="_blank" rel="external">D2XX Direct Drivers</a> and <a href="http://www.ftdichip.com/Drivers/VCP.htm" target="_blank" rel="external">Virtual COM Port Drivers</a>. Still didn’t work.</p>
+<p>Then I google this article <a href="https://learn.sparkfun.com/tutorials/how-to-install-ftdi-drivers/all#mac" target="_blank" rel="external">How to Install FTDI Drivers - learn.sparkfun.com</a> and reinstall the drive. After restarting the computer, I plug FTDI2USB device,  /dev/tty.usbserial-A400gwhT appeared in the list.</p>
+<p>Next, I tried to open py file with this command:</p>
+<p><code>python hello.light.45.py /dev/tty.usbserial-A400gwhT 9600</code></p>
+<p>Still got something wrong:</p>
+<p><code>command line: hello.light.45.py serial_port</code></p>
+<p>I looked into the python program, and figured out to change the len(sys.argv) from 2 to 3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (len(sys.argv) != 3):&#10;   print &#34;command line: hello.light.45.py serial_port&#34;&#10;   sys.exit()&#10;port = sys.argv[1]</span><br></pre></td></tr></table></figure>
+<p>Problem fixed:</p>
+<p><img src="http://7xjpra.com1.z0.glb.clouddn.com/WeChat_1464706293.jpeg" alt=""></p>
+<h3 id="A_switch_board"><a href="#A_switch_board" class="headerlink" title="A switch board"></a>A switch board</h3><p>I also made a board with a button:</p>
+<p><img src="http://7xjpra.com1.z0.glb.clouddn.com/hello.button.45.png" alt=""></p>
 <p><img src="http://7xjpra.com1.z0.glb.clouddn.com/week11myswitchboard.jpeg" alt=""></p>
-<h3 id="A_temperature_board"><a href="#A_temperature_board" class="headerlink" title="A temperature board"></a>A temperature board</h3><p><img src="http://7xjpra.com1.z0.glb.clouddn.com/hello.temp.45.png" alt=""></p>
+<p>Download <a href="http://academy.cba.mit.edu/classes/input_devices/button/hello.button.45.c" target="_blank" rel="external">hello.button.45.c</a> and <a href="http://academy.cba.mit.edu/classes/input_devices/button/hello.button.45.make" target="_blank" rel="external">makefile</a>. cd into the folder in terminal, run command: <code>make -f hello.button.45.make</code> and <code>sudo make -f hello.button.45.make program-usbtiny</code>. All going well.</p>
+<p>Connect my board to TTL2USB:</p>
+<p><img src="http://7xjpra.com1.z0.glb.clouddn.com/WeChat_1464706284.jpeg" alt=""></p>
+<p>Next, I run <code>python term.py /dev/ttyUSB0</code></p>
+<p>It responds:</p>
+<p><code>command line: term.py serial_port speed</code></p>
+<p>I forgot to change my port name to :</p>
+<p><code>python term.py /dev/tty.usbserial-A400gwhT 9600</code></p>
+<p>And the result came out:</p>
+<p><img src="http://7xjpra.com1.z0.glb.clouddn.com/WeChat_1464706285.jpeg" alt=""></p>
+<h3 id="A_temperature_board"><a href="#A_temperature_board" class="headerlink" title="A temperature board"></a>A temperature board</h3><p>I continued to make a board with a temperature sensor:</p>
+<p><img src="http://7xjpra.com1.z0.glb.clouddn.com/hello.temp.45.png" alt=""></p>
 <p><img src="http://7xjpra.com1.z0.glb.clouddn.com/week11mytempboard.jpeg" alt=""></p>
+<p>Download <a href="http://academy.cba.mit.edu/classes/input_devices/temp/hello.temp.45.c" target="_blank" rel="external">hello.temp.45.c</a> and <a href="http://academy.cba.mit.edu/classes/input_devices/temp/hello.temp.45.make" target="_blank" rel="external">makefile</a>. Used make command to make the board.</p>
+<p>Then run the program: <code>python hello.temp.45.py /dev/tty.usbserial-A400gwhT 9600</code></p>
+<p><img src="http://7xjpra.com1.z0.glb.clouddn.com/WeChat_1464706291.jpeg" alt=""></p>
 
       
     </div>
